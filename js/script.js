@@ -1,7 +1,12 @@
 'use strict';
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles';
+
 
 function titleClickHandler(event){
     const clickedElement = this;
+    event.preventDefault();
     console.log('Link was clicked!');
     // [DONE] remove class 'active' from all articles links
 
@@ -40,8 +45,28 @@ function titleClickHandler(event){
 
   }
   
-  const links = document.querySelectorAll('.titles a');
+function generateTitleLinks(){
+const titleList = document.querySelector(optTitleListSelector);
+    titleList.innerHTML = '';
+
+  let html = '';
   
-  for(let link of links){
-    link.addEventListener('click', titleClickHandler);
+  const articles = document.querySelectorAll(optArticleSelector);
+  for(let article of articles){
+    article.querySelector(optArticleSelector);
+    const articleId = article.getAttribute('id');
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    console.log(linkHTML);
+    html = html + linkHTML;
   }
+  console.log(articles);
+  titleList.innerHTML = html;
+  }
+generateTitleLinks();
+
+const links = document.querySelectorAll('.titles a');
+for(let link of links){
+  link.addEventListener('click', titleClickHandler);
+}
+console.log(links);
