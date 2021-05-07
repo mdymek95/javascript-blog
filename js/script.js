@@ -3,6 +3,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles';
 
+const optArticleTagsSelector = '.post-tags.list';
+
 
 function titleClickHandler(event){
   const clickedElement = this;
@@ -14,7 +16,7 @@ function titleClickHandler(event){
   for(let activeLink of activeLinks){
     activeLink.classList.remove('active');
   }
-    
+
   console.log('clickedElement', clickedElement);
 
   clickedElement.classList.add('active');
@@ -24,7 +26,7 @@ function titleClickHandler(event){
   for(let activeArticle of activeArticles){
     activeArticle.classList.remove('active');
   }
-   
+
   const articleSelector = clickedElement.getAttribute('href');
   console.log(articleSelector);
 
@@ -33,20 +35,19 @@ function titleClickHandler(event){
 
   targetArticle.classList.add('active');
 }
-  
+
 function generateTitleLinks(){
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
 
   let html = '';
-  
+
   const articles = document.querySelectorAll(optArticleSelector);
   for(let article of articles){
     article.querySelector(optArticleSelector);
     const articleId = article.getAttribute('id');
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-    console.log(linkHTML);
     html = html + linkHTML;
   }
   console.log(articles);
@@ -58,4 +59,38 @@ const links = document.querySelectorAll('.titles a');
 for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
-console.log(links);
+
+
+function generateTags(){
+  /* find all articles */
+  const articles = document.querySelectorAll('article');
+  /* START LOOP: for every article: */
+  for (let article of articles){
+    article.querySelector(optArticleTagsSelector);
+    let html = '';
+    const articleTags = article.getAttribute('data-tags');
+    const articleTagsArray = articleTags.split(' ');
+    console.log(articleTagsArray);
+  }
+    /* find tags wrapper */
+
+    /* make html variable with empty string */
+
+    /* get tags from data-tags attribute */
+
+    /* split tags into array */
+
+    /* START LOOP: for each tag */
+
+      /* generate HTML of the link */
+
+      /* add generated code to html variable */
+
+    /* END LOOP: for each tag */
+
+    /* insert HTML of all the links into the tags wrapper */
+
+  /* END LOOP: for every article: */
+}
+
+generateTags();
