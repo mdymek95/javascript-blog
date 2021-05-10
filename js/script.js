@@ -3,7 +3,7 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles';
 
-const optArticleTagsSelector = '.post-tags.list';
+const optArticleTagsSelector = '.post-tags .list';
 
 
 function titleClickHandler(event){
@@ -63,14 +63,20 @@ for(let link of links){
 
 function generateTags(){
   /* find all articles */
-  const articles = document.querySelectorAll('article');
+  const articles = document.querySelectorAll(optArticleSelector);
   /* START LOOP: for every article: */
   for (let article of articles){
-    article.querySelector(optArticleTagsSelector);
+    const tagList = article.querySelector(optArticleTagsSelector);
+    //tagList.innerHTML = '';
     let html = '';
     const articleTags = article.getAttribute('data-tags');
     const articleTagsArray = articleTags.split(' ');
-    console.log(articleTagsArray);
+    for (let tag of articleTagsArray){
+      const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+      html = html + linkHTML;
+    }
+    tagList.innerHTML = html;
+    console.log(tagList);
   }
     /* find tags wrapper */
 
@@ -94,3 +100,4 @@ function generateTags(){
 }
 
 generateTags();
+
