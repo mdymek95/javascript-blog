@@ -102,7 +102,7 @@ function generateAuthors(){
     const authors = article.querySelector(optArticleAuthorSelector);
     let html = '';
     const articleAuthor = article.getAttribute('data-author');
-    const linkHTML = '<p><a href="#author-' + articleAuthor + '">' + articleAuthor + '</a></p>';
+    const linkHTML = '<p><a href="#author-' + articleAuthor + '">' + 'by ' + articleAuthor + '</a></p>';
     html = html + linkHTML;
     authors.innerHTML = html;
   }
