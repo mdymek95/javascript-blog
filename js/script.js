@@ -14,21 +14,21 @@ const optArticleSelector = '.post',
 function titleClickHandler(event){
   const clickedElement = this;
   event.preventDefault();
-  console.log('Link was clicked!');
+  // console.log('Link was clicked!');
   const activeLinks = document.querySelectorAll('.titles a.active');
   for(let activeLink of activeLinks){
     activeLink.classList.remove('active');
   }
-  console.log('clickedElement', clickedElement);
+  // console.log('clickedElement', clickedElement);
   clickedElement.classList.add('active');
   const activeArticles = document.querySelectorAll('article.active');
   for(let activeArticle of activeArticles){
     activeArticle.classList.remove('active');
   }
   const articleSelector = clickedElement.getAttribute('href');
-  console.log(articleSelector);
+  // console.log(articleSelector);
   const targetArticle = document.querySelector(articleSelector);
-  console.log(targetArticle);
+  // console.log(targetArticle);
   targetArticle.classList.add('active');
 }
 
@@ -47,21 +47,25 @@ function generateTitleLinks(customSelector = ''){
     html = html + linkHTML;
   }
   titleList.innerHTML = html;
+  const links = document.querySelectorAll('.titles a');
+  for(let link of links){
+    link.addEventListener('click', titleClickHandler);
+  };
 }
 generateTitleLinks();
 
-const links = document.querySelectorAll('.titles a');
-for(let link of links){
-  link.addEventListener('click', titleClickHandler);
-}
+// const links = document.querySelectorAll('.titles a');
+// for(let link of links){
+//   link.addEventListener('click', titleClickHandler);
+// }
 
 function calculateTagsParams(tags){
   const params = {
     max: 0,
     min: 999999
-  }
+  };
   for(let tag in tags){
-    console.log(tag + ' is use ' + tags[tag] + ' times');
+    // console.log(tag + ' is use ' + tags[tag] + ' times');
     if(tags[tag] > params.max){
       params.max = tags[tag];
     }
@@ -69,7 +73,7 @@ function calculateTagsParams(tags){
       params.min = tags[tag];
     }
   }
-return params;
+  return params;
 }
 
 function calculateTagClass(count, params){
@@ -91,6 +95,7 @@ function generateTags(){
     for (let tag of articleTagsArray){
       const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
       html = html + linkHTML;
+      // eslint-disable-next-line
       if(!allTags.hasOwnProperty(tag)){
         allTags[tag] = 1;
       } else {
@@ -101,12 +106,12 @@ function generateTags(){
   }
   const tagList = document.querySelector('.tags');
   const tagsParams = calculateTagsParams(allTags);
-  console.log('tagsParams:', tagsParams);
+  // console.log('tagsParams:', tagsParams);
   let allTagsHTML = '';
 
   for(let tag in allTags){
     const tagLinkHTML = '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '</a></li>';
-    console.log('taglinkHTML:', tagLinkHTML);
+    // console.log('taglinkHTML:', tagLinkHTML);
     allTagsHTML += tagLinkHTML;
     //(' + allTags[tag] + ')
   }
@@ -118,22 +123,23 @@ function tagClickHandler(event){
   event.preventDefault();
   const clickedElement = this;
   const href = clickedElement.getAttribute('href');
-  console.log(href);
+  // console.log(href);
   const tag = href.replace('#tag-', '');
   const activeTags = document.querySelectorAll('a.active[href^="#tag-"]');
-  console.log(clickedElement);
+  // console.log(clickedElement);
   for(let activeTag of activeTags){
     activeTag.classList.remove('active');
   }
   clickedElement.classList.add('active');
+  console.log('clickedElement:', clickedElement);
   const tagLinks = document.querySelectorAll('a[href="' + href + '"]');
-  console.log(tagLinks);
+  console.log('tagLinks:', tagLinks);
   for(let tagLink of tagLinks){
     tagLink.classList.remove('active');
   }
-  const targetTag = document.querySelectorAll(optTagsListSelector);
-  console.log(targetTag);
-  //targetTag.classList.add('active');
+  const targetTag = document.querySelector();
+  console.log('targetTag:', targetTag);
+  targetTag.classList.add('active');
   generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 
@@ -155,12 +161,13 @@ function generateAuthors(){
     const linkHTML = '<p><a href="#author-' + articleAuthor + '">' + 'by ' + articleAuthor + '</a></p>';
     let html = '';
     html = html + linkHTML;
+    // eslint-disable-next-line
     if(!allAuthors.hasOwnProperty(articleAuthor)){
       allAuthors[articleAuthor] = 1;
     } else {
       allAuthors[articleAuthor]++;
     }
-    console.log(allAuthors);
+    // console.log(allAuthors);
     authors.innerHTML = html;
   }
   const authors = document.querySelector('.authors');
@@ -186,7 +193,7 @@ function authorClickHandler(event){
   }
 
   const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
-  console.log(authorLinks);
+  // console.log(authorLinks);
   for(let authorLink of authorLinks){
     authorLink.classList.add('active');
   }
