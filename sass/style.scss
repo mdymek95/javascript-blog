@@ -82,8 +82,43 @@ body {
   margin: 0;
   padding: 0;
 
+
   .active {
     font-weight: bold;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  li {
+    text-decoration: none;
+
+    .tag-size-1 {
+      font-size: 100%;
+    }
+
+    .tag-size-2 {
+      font-size: 120%;
+    }
+
+    .tag-size-3 {
+      font-size: 140%;
+    }
+
+    .tag-size-4 {
+      font-size: 160%;
+    }
+
+    .tag-size-5 {
+      font-size: 180%;
+    }
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 
@@ -93,6 +128,7 @@ body {
     margin-right: 5px;
   }
 }
+
 
 /* Authors */
 
